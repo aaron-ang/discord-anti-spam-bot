@@ -1,8 +1,8 @@
 {
   "name": "discordbot",
   "version": "1.0.0",
-  "description": "discord bot",
-  "main": "index.js",
+  "description": "discord bot to filter malicious links",
+  "main": "bot.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,5 +16,14 @@
   },
   "devDependencies": {
     "eslint": "^8.11.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aaron-ang/discord-spam-bot.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/aaron-ang/discord-spam-bot/issues"
+  },
+  "homepage": "https://github.com/aaron-ang/discord-spam-bot#readme"
 }
