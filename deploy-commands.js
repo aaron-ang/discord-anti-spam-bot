@@ -6,9 +6,9 @@ const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v9");
 
 dotenv.config();
-const botToken = process.env.token;
-const botId = process.env.clientId;
-const serverId = process.env.guildId;
+const botToken = process.env.BOT_TOKEN;
+const botId = process.env.CLIENT_ID;
+const serverId = process.env.GUILD_ID;
 
 const commands = [
   new SlashCommandBuilder()

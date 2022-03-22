@@ -1,33 +1,25 @@
+const fs = require('node:fs');
 const { Client, Intents } = require("discord.js");
 const dotenv = require("dotenv");
 dotenv.config();
 
-const botToken = process.env.token;
+const botToken = process.env.BOT_TOKEN;
 
 // Create a new client instance
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
-// When the client is ready, run this code (only once)
-client.once("ready", () => {
-  console.log("Ready!");
-});
+// Returns an array of all the file names in the given directory and filters for only .js files
+const eventFiles = fs
+  .readdirSync("./events")
+  .filter((file) => file.endsWith(".js"));
 
-client.on("ready", () => {
-  console.log(`Logged in as ${client.user.tag}!`);
-});
-
-client.on("interactionCreate", async (interaction) => {
-  if (!interaction.isCommand()) return;
-
-  const { commandName } = interaction;
-
-  if (commandName === "ping") {
-    await interaction.reply("Pong!");
-  } else if (commandName === "server") {
-    await interaction.reply(`Server name: ${interaction.guild.name}\nTotal members: ${interaction.guild.memberCount}`);
-  } else if (commandName === "user") {
-    await interaction.reply(`Your tag: ${interaction.user.tag}\nYour id: ${interaction.user.id}`);
+for (const file of eventFiles) {
+  const event = require(`./events/${file}`);
+  if (event.once) {
+    client.once(event.name, (...args) => event.execute(...args));
+  } else {
+    client.on(event.name, (...args) => event.execute(...args));
   }
-});
+}
 
 client.login(botToken);
