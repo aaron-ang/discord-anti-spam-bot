@@ -1,4 +1,4 @@
-const fs = require('node:fs');
+const fs = require("node:fs");
 const { Client, Intents } = require("discord.js");
 const dotenv = require("dotenv");
 dotenv.config();
@@ -6,7 +6,13 @@ dotenv.config();
 const botToken = process.env.BOT_TOKEN;
 
 // Create a new client instance
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const client = new Client({
+  intents: [
+    Intents.FLAGS.GUILDS,
+    Intents.FLAGS.GUILD_MESSAGES,
+    Intents.FLAGS.GUILD_BANS,
+  ],
+});
 
 // Returns an array of all the file names in the given directory and filters for only .js files
 const eventFiles = fs
