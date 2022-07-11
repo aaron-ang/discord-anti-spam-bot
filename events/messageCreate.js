@@ -8,8 +8,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const axios = require("axios").default;
+const axios_1 = __importDefault(require("axios"));
 const apiKey = process.env.API_KEY;
 const urlRegexp = new RegExp("([a-zA-Z0-9]+://)?([a-zA-Z0-9_]+:[a-zA-Z0-9_]+@)?([a-zA-Z0-9.-]+\\.[A-Za-z]{2,4})(:[0-9]+)?(/.*)?");
 const pattern = new RegExp("(http|ftp|https)://[w-_]+(.[w-_]+)+([w-.,@?^=%&amp;:/~+#]*[w-@?^=%&amp;/~+#])?");
@@ -37,11 +40,12 @@ module.exports = {
             if (urlRegexp.test(message.content) === true) {
                 const url = message.content.match(pattern)[0];
                 header.threatInfo.threatEntries[0] = { url: url };
-                yield axios
+                yield axios_1.default
                     .post(apiUrl, header)
                     .then((res) => {
                     // If there are no matches, the HTTP POST response simply returns an empty object in the response body.
-                    if (res.data === {}) {
+                    // Delete message if there is a match
+                    if (res.data !== {}) {
                         message.delete(500);
                         message.channel.send("message detected as spam and deleted");
                     }

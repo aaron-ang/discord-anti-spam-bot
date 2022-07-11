@@ -1,12 +1,12 @@
 // Run ONCE only (COMPLETE)
 
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const { REST } = require("@discordjs/rest");
-const { Routes } = require("discord-api-types/v9");
+import { SlashCommandBuilder } from "@discordjs/builders";
+import { REST } from "@discordjs/rest";
+import { Routes } from "discord-api-types/v9";
 
-dotenv.config();
-const botId = process.env.CLIENT_ID;
-const serverId = process.env.GUILD_ID;
+const botId = process.env.CLIENT_ID!;
+const serverId = process.env.GUILD_ID!;
+const botToken = process.env.BOT_TOKEN!;
 
 const commands = [
   new SlashCommandBuilder()

@@ -1,6 +1,6 @@
-const fs = require("node:fs");
-const { Client, Intents } = require("discord.js");
-const dotenv = require("dotenv");
+import fs from "fs";
+import { Client, Intents } from "discord.js";
+import dotenv from "dotenv";
 dotenv.config();
 
 const botToken = process.env.BOT_TOKEN;

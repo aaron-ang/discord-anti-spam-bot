@@ -1,19 +1,23 @@
 "use strict";
-const fs = require("node:fs");
-const { Client, Intents } = require("discord.js");
-const dotenv = require("dotenv");
-dotenv.config();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const fs_1 = __importDefault(require("fs"));
+const discord_js_1 = require("discord.js");
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 const botToken = process.env.BOT_TOKEN;
 // Create a new client instance
-const client = new Client({
+const client = new discord_js_1.Client({
     intents: [
-        Intents.FLAGS.GUILDS,
-        Intents.FLAGS.GUILD_MESSAGES,
-        Intents.FLAGS.GUILD_BANS,
+        discord_js_1.Intents.FLAGS.GUILDS,
+        discord_js_1.Intents.FLAGS.GUILD_MESSAGES,
+        discord_js_1.Intents.FLAGS.GUILD_BANS,
     ],
 });
 // Returns an array of all the file names in the given directory and filters for only .js files
-const eventFiles = fs
+const eventFiles = fs_1.default
     .readdirSync("./events")
     .filter((file) => file.endsWith(".js"));
 for (const file of eventFiles) {
