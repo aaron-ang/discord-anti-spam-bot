@@ -41,7 +41,8 @@ module.exports = {
         .post(apiUrl, header)
         .then((res: AxiosResponse) => {
           // If there are no matches, the HTTP POST response simply returns an empty object in the response body.
-          if (res.data === {}) {
+          // Delete message if there is a match
+          if (res.data !== {}) {
             message.delete(500);
             message.channel.send("message detected as spam and deleted");
           }
